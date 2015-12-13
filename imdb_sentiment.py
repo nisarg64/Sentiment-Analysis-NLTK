@@ -11,7 +11,7 @@ def get_word_features(reviews):
         wordlist = nltk.FreqDist(all_words)
         word_features = []
         for feature in wordlist:
-            if wordlist[feature] > 7000:
+            if wordlist[feature] > 10000:
                 word_features.append(feature)
         print(len(word_features))
         return word_features
@@ -34,18 +34,22 @@ test_neg_reviews=[]
 with open('./imdb/train-pos.txt','r') as f:
     for line in f:
         train_pos_reviews.append((line,'pos'))
+f.close()
 
 with open('./imdb/train-neg.txt','r') as f:
     for line in f:
         train_neg_reviews.append((line,'neg'))
+f.close()
 
 with open('./imdb/test-pos.txt','r') as f:
     for line in f:
         test_pos_reviews.append((line,'pos'))
+f.close()
 
 with open('./imdb/test-neg.txt','r') as f:
     for line in f:
         test_pos_reviews.append((line,'neg'))
+f.close()
 
 train_reviews = []
 test_reviews = []
@@ -74,7 +78,7 @@ f = open('imdb_classifier.pickle', 'wb')
 pickle.dump(classifier, f)
 f.close()
 
-# f = open('naive_bayes_classifier.pickle', 'rb')
+# f = open('imdb_classifier.pickle', 'rb')
 # classifier = pickle.load(f)
 # f.close()
 

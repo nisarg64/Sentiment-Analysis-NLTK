@@ -8,7 +8,7 @@ def get_word_features(tweets):
         wordlist = nltk.FreqDist(all_words)
         word_features = []
         for feature in wordlist:
-            if wordlist[feature] > 7000:
+            if wordlist[feature] > 10000:
                 word_features.append(feature)
         print(len(word_features))
         return word_features
@@ -68,18 +68,18 @@ training_set = nltk.classify.apply_features(extract_features, train_tweets)
 test_set = nltk.classify.apply_features(extract_features, test_tweets)
 print("Training and Test Sets Created")
 
-# classifier = nltk.NaiveBayesClassifier.train(training_set)
-# print("Model generated")
-#
-# f = open('twitter_classifier.pickle', 'wb')
-# pickle.dump(classifier, f)
-# f.close()
+classifier = nltk.NaiveBayesClassifier.train(training_set)
+print("Model generated")
 
-f = open('naive_bayes_classifier.pickle', 'rb')
-classifier = pickle.load(f)
+f = open('twitter_classifier.pickle', 'wb')
+pickle.dump(classifier, f)
 f.close()
-
-print("Model loaded")
+#
+# f = open('twitter_classifier.pickle', 'rb')
+# classifier = pickle.load(f)
+# f.close()
+#
+# print("Model loaded")
 
 accuracy = nltk.classify.accuracy(classifier,test_set)
 
